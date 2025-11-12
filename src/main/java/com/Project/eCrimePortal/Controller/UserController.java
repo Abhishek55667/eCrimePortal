@@ -17,7 +17,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<String> saveUser(@RequestBody User user){
         if (user!=null) {
-            userServices.saveUser(user);
+            userServices.saveNewUser(user);
             return new ResponseEntity<>("saved", HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -37,7 +37,8 @@ public class UserController {
         User old=userServices.getUser(id);
         if (user!=null){
             if (user!=old) {
-                saveUser(user);
+                user.setId(id);
+                userServices.saveUser(user);
                 return new ResponseEntity<>(user, HttpStatus.OK);
             }
         }

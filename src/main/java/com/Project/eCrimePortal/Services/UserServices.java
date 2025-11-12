@@ -15,6 +15,14 @@ public class UserServices {
     @Autowired
     private UserRepo userRepo;
 
+    private static int count=1;
+
+    public void saveNewUser(User user){
+        user.setId(count);
+        userRepo.save(user);
+        count++;
+    }
+
     public void saveUser(User user){
         userRepo.save(user);
     }
