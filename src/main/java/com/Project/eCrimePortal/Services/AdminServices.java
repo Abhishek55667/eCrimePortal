@@ -1,6 +1,7 @@
 package com.Project.eCrimePortal.Services;
 
 import com.Project.eCrimePortal.Entity.Admin;
+import com.Project.eCrimePortal.Entity.User;
 import com.Project.eCrimePortal.Repository.AdminRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,7 +17,7 @@ public class AdminServices {
     private AdminRepo adminRepo;
 
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-    private static int count=1;
+    private static int count=1000;
 
     public void updateCount(){
         List<Admin> admins=getAll();
@@ -34,7 +35,6 @@ public class AdminServices {
     }
 
     public void saveAdmin(Admin admin){
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         admin.setRole("ADMIN");
         adminRepo.save(admin);
     }
@@ -47,11 +47,12 @@ public class AdminServices {
         return  adminRepo.findAll();
     }
 
-    public Admin deleteByUsername(String username){
-        return adminRepo.deleteByUsername(username);
+    public void deleteByUsername(String username){
+        adminRepo.deleteByUsername(username);
     }
 
-    public void deleteAll(String passkey){
-        adminRepo.deleteAll();
+    public void changePassword(Admin admin, String password) {
+        admin.setPassword(passwordEncoder.encode(password));
+        adminRepo.save(admin);
     }
 }

@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController()
 @RequestMapping("/user")
@@ -30,16 +28,32 @@ public class UserController {
     }
 
     @PutMapping("/update-details")
-    public ResponseEntity<User> updateUser(@RequestBody User user){
+    public ResponseEntity<String> updateUser(@RequestBody User user){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        String username= authentication.getName();;
+        String username= authentication.getName();
         User old=userServices.getByUsername(username);
         if (user!=null){
             if (user!=old) {
-                user.setId(old.getId());
-                userServices.saveUser(user);
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                old.setId(old.getId());
+                old.setUsername((user.getUsername()!=null && user.getUsername() != old.getUsername())? user.getName() : old.getUsername());
+                old.setName((user.getName()!=null && user.getName() != old.getName())? user.getName() : old.getName());
+                old.setDob((user.getDob()!=null && user.getDob() != old.getDob())? user.getDob() : old.getDob());
+                old.setAddress((user.getAddress()!=null && user.getAddress() != old.getAddress())? user.getAddress() : old.getAddress());
+                userServices.saveUser(old);
+                return new ResponseEntity<>("Successfully updated", HttpStatus.OK);
             }
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/password-change")
+    public ResponseEntity<String> changePassword(@RequestBody String password){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String username=authentication.getName();
+        User user=userServices.getByUsername(username);
+        if (password!=null){
+        userServices.changePassword(user,password);
+        return new ResponseEntity<>("Password successfully changed",HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

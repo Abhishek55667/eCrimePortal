@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class UserServices {
     private UserRepo userRepo;
 
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-    private static int count=1;
+    private static int count=100000;
 
     public void updateCount(){
         for (User i : getAll()){
@@ -35,7 +36,6 @@ public class UserServices {
     }
 
     public void saveUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
         userRepo.save(user);
     }
@@ -52,8 +52,13 @@ public class UserServices {
         return userRepo.findByUsername(username);
     }
 
+    @Transactional
     public void deleteByUsername(String username){
         userRepo.deleteByUsername(username);
     }
 
+    public void changePassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepo.save(user);
+    }
 }

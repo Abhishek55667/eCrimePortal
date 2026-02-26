@@ -25,11 +25,18 @@ public class PublicController {
         userServices.updateCount();
         List<User> userList=userServices.getAll();
         for (User entity : userList){
-            if (entity.getUsername().equals(user.getUsername())){
-                return new ResponseEntity<>("username already exists", HttpStatus.OK);
-            }
-            if (entity.getMobile().equals(user.getMobile())){
-                return new ResponseEntity<>("mobile no. already exists",HttpStatus.OK);
+            try {
+                if (entity.getUsername()==(user.getUsername())) {
+                    return new ResponseEntity<>("Username already exists", HttpStatus.OK);
+                }
+                if (entity.getMobile()==(user.getMobile())) {
+                    return new ResponseEntity<>("Mobile no. already exists", HttpStatus.OK);
+                }
+                if (entity.getEmail()==(user.getEmail())) {
+                    return new ResponseEntity<>("Email already exists", HttpStatus.OK);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
         if (user!=null) {

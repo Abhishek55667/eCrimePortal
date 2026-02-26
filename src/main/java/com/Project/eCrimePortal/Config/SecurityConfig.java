@@ -1,7 +1,7 @@
 package com.Project.eCrimePortal.Config;
 
 import com.Project.eCrimePortal.Services.AdminDetailsServiceImpl;
-import com.Project.eCrimePortal.Services.AdminServices;
+import com.Project.eCrimePortal.Services.PoliceDetailsServiceImpl;
 import com.Project.eCrimePortal.Services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -28,6 +27,8 @@ public class SecurityConfig{
     private UserDetailsServiceImpl userDetailsServiceImpl;
     @Autowired
     private AdminDetailsServiceImpl adminDetailsServiceImpl;
+    @Autowired
+    private PoliceDetailsServiceImpl policeDetailsServiceImpl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -35,7 +36,9 @@ public class SecurityConfig{
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
-                        .anyRequest().permitAll())
+                        .requestMatchers("/police/**").hasRole("POLICE")
+                        .requestMatchers("/public/**").permitAll()
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
         return http.build();
@@ -51,7 +54,11 @@ public class SecurityConfig{
         userProvider.setUserDetailsService(userDetailsServiceImpl);
         userProvider.setPasswordEncoder(passwordEncoder());
 
-        return new ProviderManager(List.of(adminProvider,userProvider));
+        DaoAuthenticationProvider policeProvider=new DaoAuthenticationProvider();
+        policeProvider.setUserDetailsService(policeDetailsServiceImpl);
+        policeProvider.setPasswordEncoder(passwordEncoder());
+
+        return new ProviderManager(List.of(adminProvider,userProvider,policeProvider));
     }
 
     @Bean
