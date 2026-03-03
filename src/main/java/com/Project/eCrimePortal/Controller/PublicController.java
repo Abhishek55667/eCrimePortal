@@ -20,8 +20,8 @@ public class PublicController {
     @Autowired
     private UserServices userServices;
 
-    @PostMapping("/save")
-    public ResponseEntity<String> saveUser(@RequestBody User user){
+    @PostMapping("/sign-up")
+    public ResponseEntity<String> signUp(@RequestBody User user){
         userServices.updateCount();
         List<User> userList=userServices.getAll();
         for (User entity : userList){

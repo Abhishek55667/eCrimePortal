@@ -1,6 +1,7 @@
 package com.Project.eCrimePortal.Services;
 
 
+import com.Project.eCrimePortal.Entity.Role;
 import com.Project.eCrimePortal.Entity.User;
 import com.Project.eCrimePortal.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +19,64 @@ public class UserServices {
     private UserRepo userRepo;
 
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
-    private static int count=100000;
+    private static int adminCount=1000;
+    private static int policeCount=10000;
+    private static int userCount=100000;
 
     public void updateCount(){
         for (User i : getAll()){
-            count= i.getId()+1;
+            if (i.getRole()==Role.POLICE) {
+                policeCount = i.getId() + 1;
+            }
+            if (i.getRole()==Role.USER) {
+                userCount = i.getId() + 1;
+            }
+            if (i.getRole()==Role.ADMIN){
+                adminCount=i.getId()+1;
+            }
 
         }
     }
 
-    public void saveNewUser(User user){
-        user.setId(count);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
-        userRepo.save(user);
-        count++;
+    //Admin services methods
+    public void saveNewAdmin(User admin){
+        admin.setId(adminCount);
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        admin.setRole(Role.ADMIN);
+        userRepo.save(admin);
+        adminCount++;
     }
 
+    public void saveAdmin(User admin){
+        admin.setRole(Role.ADMIN);
+        userRepo.save(admin);
+    }
+
+    //Police services methods
+    public void saveNewPolice(User police){
+        police.setId(policeCount);
+        police.setPassword(passwordEncoder.encode(police.getPassword()));
+        police.setRole(Role.POLICE);
+        userRepo.save(police);
+        policeCount++;
+    }
+
+    public void savePolice(User police){
+        police.setRole(Role.USER);
+        userRepo.save(police);
+    }
+
+    public void saveNewUser(User user){
+        user.setId(userCount);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
+        userRepo.save(user);
+        userCount++;
+    }
+
+    //User service methods
     public void saveUser(User user){
-        user.setRole("USER");
+        user.setRole(Role.USER);
         userRepo.save(user);
     }
 
@@ -44,10 +84,8 @@ public class UserServices {
         return userRepo.findAll();
     }
 
-    public User getUser(int id){
-        return userRepo.findById(id).orElse(null);
-    }
 
+    //general used methods
     public User getByUsername(String username){
         return userRepo.findByUsername(username);
     }

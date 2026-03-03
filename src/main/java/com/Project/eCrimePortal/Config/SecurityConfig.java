@@ -1,7 +1,5 @@
 package com.Project.eCrimePortal.Config;
 
-import com.Project.eCrimePortal.Services.AdminDetailsServiceImpl;
-import com.Project.eCrimePortal.Services.PoliceDetailsServiceImpl;
 import com.Project.eCrimePortal.Services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +19,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
+public class SecurityConfig {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
@@ -45,20 +43,20 @@ public class SecurityConfig{
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception{
-        DaoAuthenticationProvider adminProvider=new DaoAuthenticationProvider();
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        DaoAuthenticationProvider adminProvider = new DaoAuthenticationProvider();
         adminProvider.setUserDetailsService(adminDetailsServiceImpl);
         adminProvider.setPasswordEncoder(passwordEncoder());
 
-        DaoAuthenticationProvider userProvider=new DaoAuthenticationProvider();
+        DaoAuthenticationProvider userProvider = new DaoAuthenticationProvider();
         userProvider.setUserDetailsService(userDetailsServiceImpl);
         userProvider.setPasswordEncoder(passwordEncoder());
 
-        DaoAuthenticationProvider policeProvider=new DaoAuthenticationProvider();
+        DaoAuthenticationProvider policeProvider = new DaoAuthenticationProvider();
         policeProvider.setUserDetailsService(policeDetailsServiceImpl);
         policeProvider.setPasswordEncoder(passwordEncoder());
 
-        return new ProviderManager(List.of(adminProvider,userProvider,policeProvider));
+        return new ProviderManager(List.of(adminProvider, userProvider, policeProvider));
     }
 
     @Bean

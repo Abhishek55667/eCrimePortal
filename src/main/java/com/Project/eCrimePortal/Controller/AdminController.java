@@ -2,11 +2,7 @@ package com.Project.eCrimePortal.Controller;
 
 
 import com.Project.eCrimePortal.Config.Passkey;
-import com.Project.eCrimePortal.Entity.Admin;
-import com.Project.eCrimePortal.Entity.Police;
 import com.Project.eCrimePortal.Entity.User;
-import com.Project.eCrimePortal.Services.AdminServices;
-import com.Project.eCrimePortal.Services.PoliceServices;
 import com.Project.eCrimePortal.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,19 +16,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-
-    @Autowired
-    private AdminServices adminServices;
+    
     @Autowired
     private UserServices userServices;
-    @Autowired
-    private PoliceServices policeServices;
 
     @PostMapping("/create-admin")
-    public ResponseEntity<String> saveAdmin(@RequestBody Admin admin){
-        adminServices.updateCount();
-        List<Admin> admins=adminServices.getAll();
-        for (Admin entity: admins){
+    public ResponseEntity<String> saveAdmin(@RequestBody User admin){
+        userServices.updateCount();
+        List<User> admins=userServices.getAll();
+        for (User entity: admins){
             if (entity.getUsername().equals(admin.getUsername())){
                 return new ResponseEntity<>("username already exists", HttpStatus.OK);
             }
@@ -44,17 +36,17 @@ public class AdminController {
             }
         }
         if (admin!=null) {
-            adminServices.saveNew(admin);
+            userServices.saveNewAdmin(admin);
             return new ResponseEntity<>("saved", HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/create-new-police")
-    public ResponseEntity<String> saveUser(@RequestBody Police police){
-        policeServices.updateCount();
-        List<Police> policeList=policeServices.getAll();
-        for (Police entity : policeList){
+    public ResponseEntity<String> savePolice(@RequestBody User police){
+        userServices.updateCount();
+        List<User> policeList=userServices.getAll();
+        for (User entity : policeList){
             if (entity.getUsername().equals(police.getUsername())){
                 return new ResponseEntity<>("username already exists", HttpStatus.OK);
             }
@@ -66,16 +58,16 @@ public class AdminController {
             }
         }
         if (police!=null) {
-            policeServices.saveNewUser(police);
+            userServices.saveNewPolice(police);
             return new ResponseEntity<>("saved", HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/get-admin-details")
-    public ResponseEntity<Admin> getAdmin(){
+    public ResponseEntity<User> getAdmin(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        Admin admin=adminServices.getByUsername(authentication.getName());
+        User admin=userServices.getByUsername(authentication.getName());
         if (admin!=null) {
             return new ResponseEntity<>(admin,HttpStatus.OK);
         }
@@ -83,8 +75,8 @@ public class AdminController {
     }
 
     @GetMapping("/get-all-admins")
-    public ResponseEntity<List<Admin>> getAll(){
-        List<Admin> adminList=adminServices.getAll();
+    public ResponseEntity<List<User>> getAll(){
+        List<User> adminList=userServices.getAll();
         if (adminList!=null) {
             return new ResponseEntity<>(adminList, HttpStatus.OK);
         }
@@ -110,9 +102,9 @@ public class AdminController {
     }
 
     @GetMapping("/get-police-details")
-    public ResponseEntity<Police> getUser(){
+    public ResponseEntity<User> getUser(){
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        Police police=policeServices.getByUsername(authentication.getName());
+        User police=userServices.getByUsername(authentication.getName());
         if (police==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -120,8 +112,8 @@ public class AdminController {
     }
 
     @GetMapping("/get-all-police")
-    public ResponseEntity<List<Police>> getAllPolice(){
-        List<Police> policeList=policeServices.getAll();
+    public ResponseEntity<List<User>> getAllPolice(){
+        List<User> policeList=userServices.getAll();
         if (policeList!=null) {
             return new ResponseEntity<>(policeList, HttpStatus.OK);
         }
@@ -129,10 +121,10 @@ public class AdminController {
     }
 
     @PutMapping("/update-admin-details")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin){
+    public ResponseEntity<User> updateAdmin(@RequestBody User admin){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String username= authentication.getName();
-        Admin old=adminServices.getByUsername(username);
+        User old=userServices.getByUsername(username);
         if (admin!=null){
             if (admin!=old) {
                 admin.setId(old.getId());
@@ -140,7 +132,7 @@ public class AdminController {
                 old.setName((admin.getName()!=null && admin.getName() != old.getName())? admin.getName() : old.getName());
                 old.setDob((admin.getDob()!=null && admin.getDob() != old.getDob())? admin.getDob() : old.getDob());
                 old.setAddress((admin.getAddress()!=null && admin.getAddress() != old.getAddress())? admin.getAddress() : old.getAddress());
-                adminServices.saveAdmin(old);
+                userServices.saveAdmin(old);
                 return new ResponseEntity<>(admin, HttpStatus.OK);
             }
         }
@@ -151,9 +143,9 @@ public class AdminController {
     public ResponseEntity<String> changePassword(@RequestBody String password){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String username=authentication.getName();
-        Admin admin=adminServices.getByUsername(username);
+        User admin=userServices.getByUsername(username);
         if (password!=null){
-            adminServices.changePassword(admin,password);
+            userServices.changePassword(admin,password);
             return new ResponseEntity<>("Password successfully changed",HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -163,9 +155,9 @@ public class AdminController {
     public ResponseEntity<String> deleteAdmin(){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String username= authentication.getName();
-        Admin admin=adminServices.getByUsername(username);
+        User admin=userServices.getByUsername(username);
         if (admin!=null){
-            adminServices.deleteByUsername(username);
+            userServices.deleteByUsername(username);
             return new ResponseEntity<>("Admin deleted",HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -175,7 +167,7 @@ public class AdminController {
     public ResponseEntity<String> wipeAllData(@RequestBody String passkey){
         Passkey key=new Passkey();
         if (passkey.equals(key.getPasskey())){
-            adminServices.getAll();
+            userServices.getAll();
             return new ResponseEntity<>("All Admins Data Has Been Wiped",HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -192,14 +184,14 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete-police-profile")
-    public ResponseEntity<Police> deleteUser(){
+    public ResponseEntity<User> deleteUser(){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
         String username=authentication.getName();
-        Police police=policeServices.getByUsername(username);
+        User police=userServices.getByUsername(username);
         if (police==null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        policeServices.deleteByUsername(username);
+        userServices.deleteByUsername(username);
         return new ResponseEntity<>(police,HttpStatus.OK);
     }
 
