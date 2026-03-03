@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,10 +24,6 @@ public class SecurityConfig {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
-    @Autowired
-    private AdminDetailsServiceImpl adminDetailsServiceImpl;
-    @Autowired
-    private PoliceDetailsServiceImpl policeDetailsServiceImpl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -43,20 +40,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        DaoAuthenticationProvider adminProvider = new DaoAuthenticationProvider();
-        adminProvider.setUserDetailsService(adminDetailsServiceImpl);
-        adminProvider.setPasswordEncoder(passwordEncoder());
-
-        DaoAuthenticationProvider userProvider = new DaoAuthenticationProvider();
-        userProvider.setUserDetailsService(userDetailsServiceImpl);
-        userProvider.setPasswordEncoder(passwordEncoder());
-
-        DaoAuthenticationProvider policeProvider = new DaoAuthenticationProvider();
-        policeProvider.setUserDetailsService(policeDetailsServiceImpl);
-        policeProvider.setPasswordEncoder(passwordEncoder());
-
-        return new ProviderManager(List.of(adminProvider, userProvider, policeProvider));
+    public void configGlobal(AuthenticationManagerBuilder authenticationManagerBuilder)throws Exception{
+        authenticationManagerBuilder.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }
 
     @Bean
