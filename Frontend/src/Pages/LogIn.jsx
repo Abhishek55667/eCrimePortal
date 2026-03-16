@@ -80,7 +80,7 @@ const LogIn = () => {
           </span>
         </div>
 
-        {/* Google Sign In Button */}
+        {/* Google Sign In Button */} 
         <button 
           type="button"
           className="w-full bg-[#f0f2f5] text-gray-700 font-medium py-3 rounded-md flex items-center justify-center gap-2 hover:bg-white transition duration-200 text-sm"

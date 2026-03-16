@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
-
+import { Link } from 'react-router-dom'
 const Register = () => {
   return (
     <div className="flex justify-center my-12">
@@ -98,7 +98,7 @@ const Register = () => {
           />
           <div className="text-center pt-4">
             <button className="bg-blue-800 text-white w-140 h-10 rounded-3xl">
-              Register
+               <Link to={'/LogIn'}>Register</Link>
             </button>
           </div>
         </div>

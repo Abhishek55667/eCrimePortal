@@ -5,7 +5,10 @@ import News from '../Components/News'
 
 const option=[{title:'Register your complaint'},
     {title:'Track your complaint'},
-    {title:'Child Abuse'}
+    {title:'Child Abuse'},
+    {title:'Cyber Crime'},
+    {title:'Child Abuse'},
+    {title:'Other'}
 ]
 
 const Home = (props) => {
