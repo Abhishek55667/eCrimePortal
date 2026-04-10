@@ -43,9 +43,7 @@ public class PublicController {
         List<User> userList=userServices.getAll();
         for (User entity : userList){
             try {
-                if (Objects.equals(entity.getUsername(), user.getUsername())) {
-                    return new ResponseEntity<>("Username already exists", HttpStatus.OK);
-                }
+
                 if (Objects.equals(entity.getMobile(), user.getMobile())) {
                     return new ResponseEntity<>("Mobile no. already exists", HttpStatus.OK);
                 }
@@ -77,6 +75,49 @@ public class PublicController {
 
         }
     }
+
+    @PostMapping("/check-username")
+    public ResponseEntity<String> checkUsername(@RequestBody String username) {
+        List<User> userList=userServices.getAll();
+        for (User entity : userList) {
+            if (Objects.equals(entity.getUsername(), username)) {
+                return new ResponseEntity<>("Username already exists", HttpStatus.OK);
+            }
+            if (username.isEmpty()){
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("ok",HttpStatus.OK);
+    }
+
+    @PostMapping("/check-mobile")
+    public ResponseEntity<String> checkMobile(@RequestBody String mobile) {
+        List<User> userList=userServices.getAll();
+        for (User entity : userList) {
+            if (Objects.equals(entity.getMobile(), mobile)) {
+                return new ResponseEntity<>("Mobile no. already exists", HttpStatus.OK);
+            }
+            if (mobile.isEmpty()){
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("ok",HttpStatus.OK);
+    }
+
+    @PostMapping("/check-email")
+    public ResponseEntity<String> checkEmail(@RequestBody String email) {
+        List<User> userList=userServices.getAll();
+        for (User entity : userList) {
+            if (Objects.equals(entity.getEmail(), email)) {
+                return new ResponseEntity<>("Email already exists", HttpStatus.OK);
+            }
+            if (email.isEmpty()){
+                return new ResponseEntity<>("", HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>("ok",HttpStatus.OK);
+    }
+
     @GetMapping("/oauth2/login/token-generate")
     public ResponseEntity<String> oauth2Login(){
         User user=successHandler.getUser();

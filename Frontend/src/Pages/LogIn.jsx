@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const link='http://192.168.1.41:8080/'
+const link='http://localhost:8080/'
 var token=''
 
 let getUser =async()=>{
