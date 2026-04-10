@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Options = (props) => {
   return (
@@ -8,7 +9,7 @@ const Options = (props) => {
             <div className='py-10'>
             Lorem ipsum dolor sit amet.
         </div>
-        <button className='bg-black text-white  px-2 py-1 rounded-2xl w-3/4 mx-7 '>Click Here</button>
+        <button className='bg-black text-white  px-2 py-1 rounded-2xl w-3/4 mx-7 '><Link to={"/ComplaintRegister"}>Click Here</Link></button>
         </div>
         </div>
   )

@@ -7,22 +7,29 @@ import { FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { MdPhoneInTalk } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
-
 import { FaTwitter } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const ContactUs = () => {
+
+const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    navigate("/Home");
+  }
+
   return (
     <div className='mt-15'>
       <div className='pb-4'>
-        <h1 className='text-center text-white font-extrabold text-4xl mt-10'>Contact us</h1>
+        <h1 className='text-center  font-extrabold text-5xl mt-10'>Contact us</h1>
         <div className='w-full flex justify-center p-2'>
-          <p className='text-white text-center w-150'>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit Lorem ipsum dolor sit amet.Quos, praesentium.
+          <p className=' text-center text-xl w-120'>
+          We are ready to provide the right solution according to your need.
         </p>
         </div>
         
       </div>
-      <div className='bg-white  rounded-2xl text-black  ml-17 h-140 w-18/20 mb-10 flex'>
+      <div className='  rounded-2xl text-black  ml-17 h-140 w-18/20 mb-10 flex  '>
         <div className='w-1/2 bg-blue-200 rounded-l-2xl h-full p-10'>
           <h1 className='text-3xl font-bold  pt-5 '>
             Get In Touch
@@ -65,7 +72,7 @@ const ContactUs = () => {
             <div className='p-3'>
               <h3 className='font-bold'>Contact Us</h3>
               <p className='text-xs'>91-7912374821</p>
-              <p className='text-xs'>91-8282727378</p>
+              <p className='text-xs'>91-8292697378</p>
             </div>
 
           </div>
@@ -82,7 +89,8 @@ const ContactUs = () => {
 
         </div>
         <div className=' h-full p-10 w-1/2 bg-blue-50 rounded-r-2xl'>
-          <h1 className='font-bold text-3xl pb-4'>
+         <form onSubmit={handleSubmit}>
+           <h1 className='font-bold text-3xl pb-4'>
             Send us a message
           </h1 >
           <div className='flex gap-15'>
@@ -91,39 +99,44 @@ const ContactUs = () => {
                 Name
               </label>
               <input
+              required
                 id="username"
                 type="text"
                 placeholder="Enter your Name"
                 className="w-full bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-500 text-sm"
               />
 
-              <label className="block text-black text-sm mb-2" htmlFor="username">
+              <label className="block text-black text-sm mb-2" htmlFor="phone">
                 Phone
               </label>
               <input
-                id="username"
-                type="text"
+              required
+                id="phone"
+                type="tel"
+                maxLength={10}
+                minLength={10}
                 placeholder="Enter your Phone no."
                 className="w-full bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-500 text-sm"
               />
 
             </div>
             <div>
-              <label className="block text-black text-sm mb-2" htmlFor="username">
+              <label className="block text-black text-sm mb-2" htmlFor="company">
               Company
             </label>
                 <input
-              id="username"
+              id="company"
               type="text"
               placeholder="Enter your Company name"
               className="w-full bg-gray-200 text-gray-800  px-2 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-500 text-sm"
             />
 
-            <label className="block text-black text-sm mb-2" htmlFor="username">
+            <label className="block text-black text-sm mb-2" htmlFor="email">
               Email
             </label>
                 <input
-              id="username"
+                required
+              id="email"
               type="email"
               placeholder="Enter your Email"
               className="w-full bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-500 text-sm"
@@ -132,17 +145,18 @@ const ContactUs = () => {
 
           </div>
           <div>
-            <label className="block text-black text-sm mb-2" htmlFor="username">
+            <label className="block text-black text-sm mb-2" htmlFor="subject">
               Subject
             </label>
                 <input
+                required
               id="Subject"
               type="text"
               placeholder="Enter your Subject"
               className="w-full bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-500 text-sm"
             />
 
-            <label className="block text-black text-sm mb-2" htmlFor="username">
+            <label className="block text-black text-sm mb-2" htmlFor="message">
               Message
             </label>
                 <textarea
@@ -158,13 +172,14 @@ const ContactUs = () => {
              <button className='bg-blue-800 text-white w-140 h-10 rounded-3xl'>Send</button>
            </div>
           </div>
+         </form>
         </div>
 
       </div>
 
 
-      <div className=''>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.7435917874463!2d80.92025477529822!3d27.00665967659125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3999511362f9e749%3A0x73357392bf18c880!2sSR%20Group%20Of%20Institutions!5e0!3m2!1sen!2sin!4v1772194583705!5m2!1sen!2sin" className='w-full h-100 rounded-2xl  '></iframe>
+      <div className='flex justify-center  '>
+        <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.7435917874463!2d80.92025477529822!3d27.00665967659125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3999511362f9e749%3A0x73357392bf18c880!2sSR%20Group%20Of%20Institutions!5e0!3m2!1sen!2sin!4v1772194583705!5m2!1sen!2sin" className='w-full h-100 rounded-2xl  '></iframe>
 
 
 

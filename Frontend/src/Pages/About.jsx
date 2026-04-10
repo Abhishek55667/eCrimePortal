@@ -13,20 +13,28 @@ const locations = [
   { lat: 26.4499, lng: 80.3319 }, 
 ];
 
-
+const Navbar = () => {
+  const [dropdown, setDropdown] = useState(false);
+}
 
 const About = () => {
   return (
     <div>
+
+
+
+  
        
       About
-      <LoadScript googleMapsApiKey='AIzaSyDxE14a8ZbgJ8y7X1xNHn9qba0bVdeODVg'>
+      <div className='static'>
+        <LoadScript  googleMapsApiKey='AIzaSyDxE14a8ZbgJ8y7X1xNHn9qba0bVdeODVg'>
       <GoogleMap zoom={6} center={locations[0]} mapContainerStyle={mapStyle}>
         {locations.map((loc,idx)=>(
           <Marker key={idx} position={loc}/>
         ))}
       </GoogleMap>
       </LoadScript>
+      </div>
 
 
       </div>

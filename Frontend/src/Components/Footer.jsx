@@ -1,22 +1,28 @@
 import React from 'react'
-
+import { FaFacebook } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
+import { IoLogoTwitter } from "react-icons/io5";
+import { MdFeedback } from "react-icons/md";
+import { IoLogoLinkedin } from "react-icons/io";
+import { IoMdHelpCircle } from "react-icons/io";
 const Footer = () => {
     return (
-        <div className='text-white w-full '>
+        <div className='text- w-full '>
 
-        <div className=' bg-radial-[at_50%_75%] from-sky-950 via-blue-800 to-blue-950 to-90% pb-5'>
+        <div className=' bg-[url("https://i.pinimg.com/1200x/32/93/72/3293723b8684b819b9ce85db7cf7ad32.jpg")] pb-5 bg-no-repeat  bg-center bg-cover'>
              <div className='flex justify-between mb-8 px-9 pt-5'>
 
                 <div className='mt-8'>
-                    <h1 className='font-bold text-3xl'>logo</h1>
-                    <p className='font-bold text-xl'>ABOUT COMPANY</p>
+                    <h1 className='font-bold text-3xl'>eCrime</h1>
+                    <p className='font-bold text-xl'>PORTAL</p>
                 </div>
                 <div className='font-bold '>
                     <h2 className='border-b-2 pb-2'>FOLLOW US</h2>
-                    <h3 className='text-xs pt-2'>INSTAGRAM</h3>
-                    <h3 className='text-xs pt-1'>FACEBOOK</h3>
-                    <h3 className='text-xs pt-1'>TWITTER</h3>
-                    <h3 className='text-xs pt-1'>LINKEDIN</h3>
+                    
+                    <div className='flex gap-2 pt-2'><FaInstagram /><h3 className='text-xs pt-1'>INSTAGRAM</h3></div>
+                    <div className='flex gap-2'><FaFacebook /><h3 className='text-xs pt-1'>FACEBOOK</h3></div>
+                    <div className='flex gap-2'><IoLogoTwitter /><h3 className='text-xs pt-1'>TWITTER</h3></div>
+                    <div className='flex gap-2'><IoLogoLinkedin /><h3 className='text-xs pt-1'>LINKENDIN</h3></div>
                 </div>
 
                 <div className='font-bold '>
@@ -34,8 +40,8 @@ const Footer = () => {
                         HELP DESK
                     </h1>
 
-                    <h2 className='pt-2'>Help</h2>
-                    <h3>Feedback</h3>
+                    <div className='flex gap-2 pt-2'><IoMdHelpCircle /><h3 className='text-xs pt-1'>Help</h3></div>
+                     <div className='flex gap-2'><MdFeedback /><h3 className='text-xs pt-1'>Feedback</h3></div>
 
                 </div>
 
