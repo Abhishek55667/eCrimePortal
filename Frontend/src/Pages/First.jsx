@@ -20,7 +20,7 @@ const First = () => {
             This portal is an initiative of Government of India to facilitate victims/complainants to report cyber crime complaints online. This portal caters to complaints pertaining to cyber crimes only with special focus on cyber crimes against women and children. Complaints reported on this portal are dealt by law enforcement agencies/ police based on the information available in the complaints. It is imperative to provide correct and accurate details while filing complaint for prompt action.
          </p>
          <div className='flex gap-15'>
-            <button className='px-15 py-3 bg-blue-500 font-bold text-xl rounded-2xl'><Link to={'/Login'}>Login</Link></button>
+            <button className='px-15 py-3 bg-blue-500 font-bold text-xl rounded-2xl'><Link to={'/LogIn'}>Login</Link></button>
             <button className='px-15 py-3 bg-gray-400 font-bold text-xl  rounded-2xl'><Link to={'/Register'}>Register</Link></button>
             
 

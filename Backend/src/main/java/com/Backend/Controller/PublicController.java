@@ -40,20 +40,6 @@ public class PublicController {
     @PostMapping("/sign-up")
     public ResponseEntity<String> signUp(@RequestBody User user){
         userServices.updateCount();
-        List<User> userList=userServices.getAll();
-        for (User entity : userList){
-            try {
-
-                if (Objects.equals(entity.getMobile(), user.getMobile())) {
-                    return new ResponseEntity<>("Mobile no. already exists", HttpStatus.OK);
-                }
-                if (Objects.equals(entity.getEmail(), user.getEmail())) {
-                    return new ResponseEntity<>("Email already exists", HttpStatus.OK);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
         if (user!=null) {
             userServices.saveNewUser(user);
             return new ResponseEntity<>("saved", HttpStatus.OK);

@@ -1,6 +1,8 @@
 package com.Backend.Controller;
 
+import com.Backend.Entity.Complaints;
 import com.Backend.Entity.User;
+import com.Backend.Services.ComplaintServices;
 import com.Backend.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,13 +11,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController()
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserServices userServices;
-
 
     @GetMapping("/get-details")
     public ResponseEntity<User> getUser(){
@@ -68,5 +72,32 @@ public class UserController {
         }
         userServices.deleteByUsername(username);
         return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @PostMapping("/register-complaint")
+    public ResponseEntity<String> saveComplaint(@RequestBody Complaints complaints){
+        if (complaints!=null){
+            userServices.saveNewComplaint(complaints);
+            return new ResponseEntity<>("saved", HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/show-all")
+    public ResponseEntity<List<Complaints>> getAllComplaints(){
+        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+        String username=authentication.getName();
+        List<Complaints> list=new ArrayList<>();
+        for (Complaints x: userServices.getAllComplaints()){
+            if (x.getUsername().equals(username)){
+                list.add(x);
+            }
+        }
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("/track-complaint-id/{complaintId}")
+    public ResponseEntity<Complaints> getComplaintById(@PathVariable int complaintId) {
+        return new ResponseEntity<>(userServices.getComplaintById(complaintId), HttpStatus.OK);
     }
 }

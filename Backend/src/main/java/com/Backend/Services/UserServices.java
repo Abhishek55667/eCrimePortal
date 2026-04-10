@@ -1,8 +1,11 @@
 package com.Backend.Services;
 
 
+import com.Backend.Entity.Complaints;
 import com.Backend.Entity.Role;
+import com.Backend.Entity.Status;
 import com.Backend.Entity.User;
+import com.Backend.Repository.ComplaintRepo;
 import com.Backend.Repository.UserRepo;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ import java.util.Objects;
 public class UserServices {
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private ComplaintRepo complaintRepo;
 
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
     private static int adminCount=1000;
@@ -111,6 +117,23 @@ public class UserServices {
             }
         }
         return false;
+    }
+
+    public void saveNewComplaint(Complaints complaints){
+        complaints.setStatus(Status.REGISTERED);
+        complaintRepo.save(complaints);
+    }
+
+    public void saveComplaint(Complaints complaints){
+        complaintRepo.save(complaints);
+    }
+
+    public List<Complaints> getAllComplaints(){
+        return complaintRepo.findAll();
+    }
+
+    public Complaints getComplaintById(int complaintId){
+        return complaintRepo.findByComplaintId(complaintId);
     }
 
 }
