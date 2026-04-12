@@ -1,18 +1,65 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
-
-
-
+import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 const LogIn = () => {
 
-  
-  const navigate = useNavigate();
+  const navigate=useNavigate();
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [token, setToken] = useState('')
 
   const handleSubmit = (e) => {
-    navigate("/Home");
+    e.preventDefault();
+    console.log(token)
+    console.log(username,password)
+    getUser()
+  
+  }
+
+  const generateToken=async()=>{
+    let link = "http://localhost:8080/public/log-in"
+    const response=await fetch(link,{
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({username:username,password:password})
+    });
+
+    const result=await response.text();
+    if(result!='username and password not match'){
+      setToken(result)
+    }
+  }
+
+  useEffect(()=>{
+    generateToken()
+  },[username,password])
+
+  const getUser=async()=>{
+    let link = "http://localhost:8080/user/get-details"
+    const response=await fetch(link,{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type":"application/json"
+      }
+    });
+
+    const result=await response.json();
+    console.log(result.role)
+    if(result.role==="USER"){
+      console.log("user")
+      navigate('/Home')
+    }
+    
+    else if(result.role==="POLICE"){
+      console.log("police")
+      navigate('police')
+    }
+    
   }
 
   return (
@@ -27,19 +74,25 @@ const LogIn = () => {
           eCrimePortal Login
         </h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e)=>{
+          handleSubmit(e)
+          }}>
           {/* Username/Mobile Input */}
           <div className="mb-5">
             <label className="block text-black text-sm mb-2" htmlFor="username">
-              UserName/Mobile
+              UserName
             </label>
             <input
             required
               id="username"
               type="text"
-              placeholder="Enter your Username/Mobile"
+              placeholder="Enter your Username"
               className="w-full bg-[#f0f2f5] text-gray-800 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400 text-sm"
-            />
+              value={username}
+              onChange={(e)=>{
+                setUsername(e.target.value)
+              }}
+          />
           </div>
 
           {/* Password Input */}
@@ -53,12 +106,19 @@ const LogIn = () => {
               type="password"
               placeholder="Enter your password"
               className="w-full bg-[#f0f2f5] text-gray-800 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 placeholder-gray-400 text-sm"
+              value={password}
+              onChange={(e)=>{
+                setPassword(e.target.value)
+              }}
             />
           </div>
 
           {/* Login Button */}
           <button
             type="submit"
+            onClick={()=>{
+              generateToken()
+            }}
             className="w-full bg-[#f0f2f5] text-[#3171c6] font-medium py-3 rounded-md hover:bg-white transition duration-200 text-sm"
           >
             Login

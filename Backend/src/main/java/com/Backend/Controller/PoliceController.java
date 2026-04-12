@@ -22,16 +22,6 @@ public class PoliceController {
     private UserServices policeServices;
 
 
-    @GetMapping("/get-details")
-    public ResponseEntity<User> getUser(){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        User police=policeServices.getByUsername(authentication.getName());
-        if (police==null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(police,HttpStatus.OK);
-    }
-
     @PutMapping("/update-police-details")
     public ResponseEntity<String> updateUser(@RequestBody User police){
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();

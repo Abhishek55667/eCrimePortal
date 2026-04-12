@@ -66,15 +66,6 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/get-admin-details")
-    public ResponseEntity<User> getAdmin(){
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        User admin=userServices.getByUsername(authentication.getName());
-        if (admin!=null) {
-            return new ResponseEntity<>(admin,HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 
     @GetMapping("/get-all-admins")
     public ResponseEntity<List<User>> getAll(){

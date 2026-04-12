@@ -47,7 +47,7 @@ public class PublicController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/log-in")
     public ResponseEntity<String> login(@RequestBody User user) {
         try {
             authenticationManager.authenticate(
@@ -57,7 +57,7 @@ public class PublicController {
             return new ResponseEntity<>(jwt,HttpStatus.OK);
         }
         catch (Exception e){
-            return new ResponseEntity<>("username and password not match",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("username and password not match",HttpStatus.OK);
 
         }
     }

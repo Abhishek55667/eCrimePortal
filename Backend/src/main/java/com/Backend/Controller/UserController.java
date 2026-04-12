@@ -26,7 +26,7 @@ public class UserController {
         Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
         User user=userServices.getByUsername(authentication.getName());
         if (user==null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
