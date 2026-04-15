@@ -58,7 +58,7 @@ const requiredFields = {
 };
 
 // =========================================================================
-// MOVED COMPONENTS OUTSIDE OF MAIN FUNCTION TO PREVENT LOSING FOCUS
+// UI COMPONENTS
 // =========================================================================
 
 const Label = ({ htmlFor, text, required }) => (
@@ -124,7 +124,9 @@ const FormCard = ({ icon, step, title, subtitle, children }) => (
 );
 
 
+// =========================================================================
 // MAIN COMPONENT
+// =========================================================================
 
 const Complaint = () => {
   const navigate = useNavigate();
@@ -134,16 +136,28 @@ const Complaint = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [charCount, setCharCount] = useState(0);
 
-  // Initial Form State
   const [formValues, setFormValues] = useState({
     fullName: '', email: '', phone: '', idProofType: '', address: '', idProofNumber: '',
     complaintTitle: '', crimeCategory: '', incidentLocation: '', incidentDate: '',
     incidentTime: '', incidentDescription: '', declaration: false
   });
 
-  // Handle standard input changes
+  // --- UPDATED INPUT HANDLER ---
   const handleInputChange = (e) => {
-    const { id, value, type, checked } = e.target;
+    const { id, type, checked } = e.target;
+    let value = e.target.value;
+
+    // 1. Restrict Full Name and Complaint Title to Letters & Spaces ONLY
+    if (id === 'fullName' || id === 'complaintTitle') {
+      value = value.replace(/[^a-zA-Z\s]/g, '');
+    }
+
+    // 2. Restrict Phone Number to Numbers ONLY
+    if (id === 'phone') {
+      value = value.replace(/[^0-9]/g, '');
+    }
+
+    // Update state with the cleaned value
     setFormValues(prev => ({
       ...prev,
       [id]: type === 'checkbox' ? checked : value
@@ -154,14 +168,12 @@ const Complaint = () => {
     }
   };
 
-  // Submit Logic
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted Data:', formValues);
     navigate("/Home");
   };
 
-  // File Upload Logic
   const handleFileDrop = (e) => {
     e.preventDefault();
     setDragOver(false);
@@ -207,7 +219,8 @@ const Complaint = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                 <div>
                   <Label htmlFor="fullName" text="Full Name" required />
-                  <FormInput id="fullName" value={formValues.fullName} onChange={handleInputChange} placeholder="Enter your full name" icon={<CustomIcon {...Icons.User} className="w-5 h-5" />} required />
+                  <FormInput id="fullName" value={formValues.fullName} onChange={handleInputChange} 
+                  type="text" placeholder="Enter your full name" icon={<CustomIcon {...Icons.User} className="w-5 h-5" />} required />
                 </div>
                 <div>
                   <Label htmlFor="email" text="Email Address" required />
@@ -237,6 +250,11 @@ const Complaint = () => {
             {/* 2. Complaint Details */}
             <FormCard step={2} icon={<CustomIcon {...Icons.Info} />} title="Complaint Details" subtitle="Provide specific information about the incident.">
               <div className="space-y-5">
+                <div>
+                  <Label htmlFor="complaintTitle" text="Complaint Title" required />
+                  {/* Applied letter restriction to Complaint Title in handler */}
+                  <FormInput id="complaintTitle" value={formValues.complaintTitle} onChange={handleInputChange} placeholder="Brief title for your complaint" icon={<CustomIcon {...Icons.DocumentText} className="w-5 h-5" />} required />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                   <div>
                     <Label htmlFor="crimeCategory" text="Crime Category" required />

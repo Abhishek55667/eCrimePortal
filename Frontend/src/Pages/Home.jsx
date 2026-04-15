@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-// --- Inline SVGs for zero dependencies ---
+
 const DocumentIcon = ({ className }) => (
   <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -36,7 +36,7 @@ const ArrowRightIcon = () => (
   </svg>
 );
 
-// --- Data for the cards ---
+
 const services = [
   {
     id: 1,
@@ -45,6 +45,7 @@ const services = [
     icon: DocumentIcon,
     bgClass: 'bg-blue-100',
     colorClass: 'text-blue-600',
+    click:'/Complaint'
   },
   {
     id: 2,
@@ -53,6 +54,7 @@ const services = [
     icon: ChartTrendingIcon,
     bgClass: 'bg-green-100',
     colorClass: 'text-green-600',
+     click:'/TrackComplaintFirst'
   },
   {
     id: 3,
@@ -61,6 +63,7 @@ const services = [
     icon: HistoryIcon,
     bgClass: 'bg-purple-100',
     colorClass: 'text-purple-600',
+     click:'/Complaint'
   },
   {
     id: 4,
@@ -68,7 +71,8 @@ const services = [
     description: 'Learn about the latest cyber threats, prevention techniques, and best practices for online safety.',
     icon: BookIcon,
     bgClass: 'bg-orange-100',
-    colorClass: 'text-orange-500', // Adjusted slightly for visual balance
+    colorClass: 'text-orange-500',
+     click:'/Complaint'
   },
 ];
 
@@ -118,7 +122,7 @@ const Home = () => {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
-             <Link to={'/TrackComplaint'}> Track Complaint</Link>
+             <Link to={'/TrackComplaintFirst'}> Track Complaint</Link>
             </button>
           </div>
         </div>
@@ -199,7 +203,7 @@ const Home = () => {
               // Uses flex flex-col to push the link to the bottom natively
               <div 
                 key={service.id}
-                className="group flex flex-col bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 ease-out cursor-pointer"
+                className="group flex flex-col bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover: transition-all duration-300 ease-out cursor-pointer"
               >
                 
                 {/* Icon Box */}
@@ -218,12 +222,14 @@ const Home = () => {
                 </p>
 
                 {/* Action Link */}
-                <a 
-                  href={`#${service.title.replace(/\s+/g, '-').toLowerCase()}`}
-                  className={`inline-flex items-center text-sm font-semibold transition-opacity hover:opacity-80 ${service.colorClass}`}
-                >
-                  Learn More <ArrowRightIcon />
-                </a>
+         <Link to={service.click}
+
+  className="inline-flex items-center text-sm font-semibold transition-opacity hover:opacity-80"
+  style={{ color: service.colorClass }}
+>
+  <div>Learn More</div>
+  <ArrowRightIcon className="ml-1" />
+</Link>
 
               </div>
             );
