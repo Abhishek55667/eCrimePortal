@@ -26,12 +26,11 @@ const First = () => {
           <div className='flex flex-col gap-5'>
             <div className='flex gap-15'>
               {/* 3. Attach the handler to the button and remove the empty Link */}
-              <button 
-                className='px-15 py-3 bg-blue-500 font-bold text-xl rounded-2xl cursor-pointer' 
-                onClick={handleLoginClick}
-              >
-                Login
-              </button>
+              <Link to={'/LogIn'}>
+                <button className='px-15 py-3 bg-blue-600 font-bold text-xl rounded-2xl cursor-pointer'>
+                  Login
+                </button>
+              </Link>
               
               <Link to={'/Register'}>
                 <button className='px-15 py-3 bg-gray-400 font-bold text-xl rounded-2xl cursor-pointer'>
@@ -40,17 +39,7 @@ const First = () => {
               </Link>
             </div>
 
-            {/* 4. Conditionally render the login options based on the state */}
-            {showLoginOptions && (
-              <div className='flex gap-5 mt-4 text-black'>
-                <button className='bg-amber-200 px-6 py-2 rounded-xl font-semibold cursor-pointer'>
-                  <Link to={'/LogIn'}>Login as User</Link>
-                </button>
-                <button className='bg-amber-200 px-6 py-2 rounded-xl font-semibold cursor-pointer'>
-                  <Link to={'/PoliceLogIn'}>Login as Police</Link>
-                </button>
-              </div>
-            )}
+            
           </div>
 
         </div>

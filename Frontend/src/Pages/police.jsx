@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom';
+import { TokenDataContext } from './TokenContext';
 
 
 //Resolved Cases
@@ -162,6 +163,33 @@ const StatusBadge = ({ status }) => {
 
 const 
 police = () => {
+
+  const [token,setToken]=useContext(TokenDataContext)
+
+  const [username, setUsername] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [email, setEmail] = useState('')
+  const t=localStorage.getItem("token")
+
+  const getUser=async()=>{
+    let link = "http://localhost:8080/user/get-details"
+    const response=await fetch(link,{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${t}`,
+        "Content-Type": "application/json"
+      }
+    });
+    const result=await response.json();
+    setUsername(result.name)
+    setMobile(result.mobile)
+    setEmail(result.email)
+    console.log(result)
+  }
+  useEffect(()=>{
+    getUser()
+  },[])
+
   return (
     <div>
         <div className="bg-gray-100 min-h-fit flex items-start justify-center p-8">
@@ -180,7 +208,7 @@ police = () => {
           {/* Details */}
           <div>
             <h2 className="text-3xl font-semibold text-black">
-              Inspector Rajesh Kumar
+              Inspector {username}
             </h2>
 
             <p className="text-orange-500 font-medium mt-1">
@@ -196,12 +224,12 @@ police = () => {
 
               <div>
                 <p className="text-gray-400">Contact</p>
-                <p className="font-medium">+91 98765 43210</p>
+                <p className="font-medium">{mobile}</p>
               </div>
 
               <div>
                 <p className="text-gray-400">Email</p>
-                <p className="font-medium">rajesh.kumar@police.gov.in</p>
+                <p className="font-medium">{email}</p>
               </div>
 
             </div>
