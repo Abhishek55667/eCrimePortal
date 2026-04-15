@@ -57,7 +57,11 @@ const LogIn = () => {
     
     else if(result.role==="POLICE"){
       console.log("police")
-      navigate('police')
+      navigate('/police')
+    }
+      else if(result.role==="ADMIN"){
+      console.log("admin")
+      navigate('/AdminIndex')
     }
     
   }

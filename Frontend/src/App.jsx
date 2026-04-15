@@ -11,17 +11,21 @@ import First from './Pages/First'
 import Footer from './Components/Footer'
 import Complaint from './Pages/Complaint'
 import TrackComplaint from './Pages/TrackComplaint'
-import Top from './Pages/Top'
+
 import Police from './Pages/police'
 import ComplaintDetails from './Pages/Police module/ComplaintDetails'
 import TrackComplaintFirst from './Pages/Police module/TrackComplaintFirst'
 import UpdateComplaint from './Pages/Police module/UpdateComplaint'
 import PoliceLogIn from './Pages/Police module/PoliceLogIn'
+import UserMap from './Pages/UserMap'
+import AdminIndex from './Pages/Admin Module/AdminIndex'
 
 const App = () => {
   return (
     <div className='bg-[url("https://i.pinimg.com/736x/52/af/96/52af968e07c64ba7d4d33335399126bb.jp")] h-screen bg-cover bg-no-repeat bg-center bg-fixed overflow-y-auto fixed w-full '>
-      <Navbar />
+     <div className=''> <Navbar /></div>
+
+
      <div className='pt-21 ' >
         
        
@@ -31,7 +35,7 @@ const App = () => {
         <Route path='/About' element={<About/>}></Route>
         <Route path='/Services' element={<Services/>}></Route>
         <Route path='/LogIn' element={<LogIn/>}></Route>
-        <Route path='/Top' element={<Top/>}></Route>
+        
         <Route path='/Register' element={<Register/>}></Route>
          <Route path='/police' element={<Police/>}></Route>
         <Route path='/' element={<First/>}></Route>
@@ -41,6 +45,10 @@ const App = () => {
          <Route path='/TrackComplaintFirst' element={<TrackComplaintFirst/>}></Route>
          <Route path='/UpdateComplaint' element={<UpdateComplaint/>}></Route>
           <Route path='/PoliceLogIn' element={<PoliceLogIn/>}></Route>
+           <Route path='/UserMap' element={<UserMap/>}></Route>
+             <Route path='/AdminIndex' element={<AdminIndex/>}></Route>
+
+
       
       </Routes>
      </div>

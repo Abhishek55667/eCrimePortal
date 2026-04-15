@@ -84,9 +84,9 @@ const [newStatus, setNewStatus] = useState('');
   return (
     <div>
 
-<div className="  bg-gray-200  flex items-center justify-center p-4 z-50">
+<div className="  bg-gray-200  flex items-center justify-center p-4 z-50 ">
             {/* Modal Container */}
-            <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl  border border-gray-100 overflow-hidden">
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl  border border-gray-100 overflow-hidden">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-gray-100 bg-white">
@@ -94,12 +94,7 @@ const [newStatus, setNewStatus] = useState('');
                         <h2 className="text-2xl font-bold text-gray-900">Update Complaint Status</h2>
                         <p className="text-sm text-gray-600 mt-1">Case ID: <span className={`font-semibold ${colors.amber.caseText}`}>EC-2026-045678</span></p>
                     </div>
-                    <button 
-                        onClick={onClose}
-                        className="text-gray-400 hover:text-gray-600 p-1.5 rounded-full transition-colors focus:ring-2 focus:ring-gray-100"
-                    >
-                        <XIcon />
-                    </button>
+                   
                 </div>
 
                 {/* Form Content - use semantic <form> */}
