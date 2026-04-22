@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // --- Custom Icons ---
 const CustomIcon = ({ path, className = "w-6 h-6" }) => (
@@ -26,15 +26,29 @@ function Detail({ label, value }) {
 }
 
 // --- Data ---
-const steps = [
-  { id: 1, title: 'Complaint Submitted', date: '01 Apr 2026', status: 'completed' },
-  { id: 2, title: 'Under Review', date: '02 Apr 2026', status: 'completed' },
-  { id: 3, title: 'Investigation', date: '03 Apr 2026', status: 'current', label: 'In Progress' },
-  { id: 4, title: 'Action Taken', date: '', status: 'pending', },
-  { id: 5, title: 'Closed / Resolved', date: '', status: 'pending' },
-];
+
 
 const TrackComplaint = () => {
+  
+  const [complaint, setComplaint] = useState(JSON.parse(sessionStorage.getItem("complaint")) || {})
+
+  const steps = [
+  { id: 1, title: 'Complaint Submitted', status: 'REGISTERED' },
+  { id: 2, title: 'Under Review', status: 'REGISTERED' },
+  { id: 3, title: 'Investigation', status: 'current', label: 'IN_PROCESS' },
+  { id: 4, title: 'Action Taken', status: 'ACTION_TAKEN', },
+  { id: 5, title: 'Closed / Resolved', status: 'SOLVED' },
+];
+
+  const officer=()=>{
+    if(!complaint.assignedOfficer){
+      return "----------"
+    }
+    else{
+      return complaint.assignedOfficer
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-12 px-4 gap-12 font-sans">
       
@@ -51,13 +65,13 @@ const TrackComplaint = () => {
 
         <div className="grid md:grid-cols-2 gap-y-10 gap-x-20 text-gray-700">
           <div className="space-y-8">
-            <Detail label="Complaint ID" value="EC2026001234" />
-            <Detail label="Date Submitted" value="01 April 2026" />
-            <Detail label="Assigned Officer" value="Inspector Rajesh Kumar" />
+            <Detail label="Complaint ID" value={complaint.complaintId} />
+            <Detail label="Date Submitted" value={complaint.date} />
+            <Detail label="Assigned Officer" value={officer()} />
           </div>
           <div className="space-y-8">
-            <Detail label="Complaint Type" value="Cyber Fraud" />
-            <Detail label="Current Status" value="Under Investigation" />
+            <Detail label="Complaint Type" value={complaint.category} />
+            <Detail label="Current Status" value={complaint.status} />
             <Detail label="Police Station" value="Cyber Crime Cell, Delhi" />
           </div>
         </div>
@@ -65,10 +79,9 @@ const TrackComplaint = () => {
         <div className="mt-10 pt-8 border-t border-gray-100">
           <p className="text-gray-500 font-medium text-sm mb-3">Description</p>
           <p className="text-gray-800 leading-relaxed bg-gray-50 p-6 rounded-xl border border-gray-100 transition hover:bg-blue-50/50 hover:border-blue-100">
-            Reported fraudulent transaction of ₹50,000 through phishing email.
-            The suspect impersonated a bank official and obtained sensitive
-            banking credentials.
+          {complaint.description}
           </p>
+           
         </div>
       </div>
 
@@ -82,7 +95,7 @@ const TrackComplaint = () => {
         <div className="flex flex-col">
           {steps.map((step, index) => {
             const isLast = index === steps.length - 1;
-            const isCompleted = step.status === 'completed';
+            const isCompleted = step.status === complaint.status;
             const isCurrent = step.status === 'current';
             const isPending = step.status === 'pending';
 

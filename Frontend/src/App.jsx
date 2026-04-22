@@ -14,7 +14,7 @@ import TrackComplaint from './Pages/TrackComplaint'
 
 import Police from './Pages/police'
 import ComplaintDetails from './Pages/Police module/ComplaintDetails'
-import TrackComplaintFirst from './Pages/Police module/TrackComplaintFirst'
+import TrackComplaintFirst from './Pages/TrackComplaintFirst'
 import UpdateComplaint from './Pages/Police module/UpdateComplaint'
 import PoliceLogIn from './Pages/Police module/PoliceLogIn'
 import UserMap from './Pages/UserMap'

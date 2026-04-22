@@ -30,9 +30,13 @@ const LogIn = () => {
 
     const result=await response.text();
     if(result!='username and password not match'){
-      localStorage.setItem("token",result)
-      console.log(localStorage.getItem("token"))
+      sessionStorage.setItem("token",result)
+      console.log(sessionStorage.getItem("token"))
       setToken(result)
+    }
+    else if(result==='username and password not match'){
+      setToken(null)
+      sessionStorage.removeItem("token")
     }
   }
 
@@ -61,6 +65,11 @@ const LogIn = () => {
       console.log("police")
       navigate('/police')
     }
+
+    else if(result.role==="ADMIN"){
+      console.log("admin")
+      navigate('/AdminIndex')
+    }
     
   }
 
@@ -86,6 +95,7 @@ const LogIn = () => {
             </label>
             <input
             required
+            
               id="username"
               type="text"
               placeholder="Enter your Username"

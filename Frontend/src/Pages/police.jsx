@@ -169,14 +169,13 @@ police = () => {
   const [username, setUsername] = useState('')
   const [mobile, setMobile] = useState('')
   const [email, setEmail] = useState('')
-  const t=localStorage.getItem("token")
 
   const getUser=async()=>{
     let link = "http://localhost:8080/user/get-details"
     const response=await fetch(link,{
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${t}`,
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
         "Content-Type": "application/json"
       }
     });
