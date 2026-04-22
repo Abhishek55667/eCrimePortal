@@ -1,11 +1,11 @@
 import React from "react";
 
-<<<<<<< HEAD
-import Police from './Pages/police'
-import ComplaintDetails from './Pages/Police module/ComplaintDetails'
+
+import Police from "./Pages/Police module/Police"
+
 import TrackComplaintFirst from './Pages/TrackComplaintFirst'
 import UpdateComplaint from './Pages/Police module/UpdateComplaint'
-import PoliceLogIn from './Pages/Police module/PoliceLogIn'
+
 import UserMap from './Pages/UserMap'
 import AdminIndex from './Pages/Admin Module/AdminIndex'
 
@@ -21,13 +21,13 @@ import Footer from "./Components/Footer";
 import Complaint from "./Pages/Complaint";
 import TrackComplaint from "./Pages/TrackComplaint";
 
-import Police from "./Pages/Police module/Police";
 
-import TrackComplaintFirst from "./Pages/Police module/TrackComplaintFirst";
-import UpdateComplaint from "./Pages/Police module/UpdateComplaint";
 
-import UserMap from "./Pages/UserMap";
-import AdminIndex from "./Pages/Admin Module/AdminIndex";
+
+
+
+
+
 import ViewComplaint from "./Pages/Police module/ViewComplaint";
 import PoliceMain from "./Pages/Police module/PoliceMain";
 import UserMain from "./Pages/UserMain";

@@ -3,7 +3,7 @@ import React from 'react'
 import PoliceNavBar from './PoliceNavBar'
 import { Route, Routes } from 'react-router-dom'
 
-import TrackComplaintFirst from './TrackComplaintFirst'
+import TrackComplaintFirst from '../TrackComplaintFirst'
 import UpdateComplaint from './UpdateComplaint'
 import ViewComplaint from './ViewComplaint'
 import Police from './Police'

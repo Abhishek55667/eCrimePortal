@@ -31,17 +31,8 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-<<<<<<< HEAD
-        <Link to={"/ContactUs"} className="hover:text-blue-600 duration-200 transition-colors">Contact Us</Link>
-        <button className="bg-red-700 rounded-2xl text-lg px-2 hover:bg-red-600 duration-200 transition-colors" 
-        onClick={()=>{
-          localStorage.clear()
-          navigate("/LogIn")
-        }}>Log Out</button>
-=======
         <Link to={"/UserMain/ContactUs"} className="hover:text-blue-600 duration-200 transition-colors">Contact Us</Link>
         <button className="bg-red-700 rounded-2xl text-xs px-2 hover:bg-red-600 duration-200 transition-colors">LogOut</button>
->>>>>>> ab1c3e156ca4a82b3e5318b60774338ea461986f
       </div>
     </div>
   );
