@@ -30,6 +30,7 @@ const App = () => {
     <div className=" ">
       <div className=" ">
         <Routes>
+          <Route path="/" element={<First />}></Route>
            <Route path="/Register" element={<Register />}></Route>
           <Route path="/First" element={<First />}></Route>
           <Route path="/LogIn" element={<LogIn />}></Route>
@@ -38,7 +39,7 @@ const App = () => {
             <Route path="ContactUs" element={<ContactUs />}></Route>
 
             <Route path="Services" element={<Services />}></Route>
-            <Route path="First" element={<First />}></Route>
+            
             <Route path="Complaint" element={<Complaint />}></Route>
             <Route path="TrackComplaint" element={<TrackComplaint />}></Route>
             <Route
