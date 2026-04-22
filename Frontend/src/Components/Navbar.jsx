@@ -1,7 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { use, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+
+  const navigate=useNavigate();
+  const [logOut, setLogOut] = useState()
+
+
   return (
     <div className='bg-[#0D1525] bg-blend-darken text-teal-50 flex justify-between px-5 py-6   fixed w-screen top-0 '>
       <div className="text-3xl font-bold">
@@ -26,8 +31,17 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+<<<<<<< HEAD
+        <Link to={"/ContactUs"} className="hover:text-blue-600 duration-200 transition-colors">Contact Us</Link>
+        <button className="bg-red-700 rounded-2xl text-lg px-2 hover:bg-red-600 duration-200 transition-colors" 
+        onClick={()=>{
+          localStorage.clear()
+          navigate("/LogIn")
+        }}>Log Out</button>
+=======
         <Link to={"/UserMain/ContactUs"} className="hover:text-blue-600 duration-200 transition-colors">Contact Us</Link>
         <button className="bg-red-700 rounded-2xl text-xs px-2 hover:bg-red-600 duration-200 transition-colors">LogOut</button>
+>>>>>>> ab1c3e156ca4a82b3e5318b60774338ea461986f
       </div>
     </div>
   );

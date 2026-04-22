@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { TokenDataContext } from "./TokenContext";
 
 
 const LogIn = () => {
@@ -8,11 +9,10 @@ const LogIn = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
+  const [token, setToken] = useContext(TokenDataContext)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(token)
     console.log(username,password)
     getUser()
   
@@ -30,7 +30,13 @@ const LogIn = () => {
 
     const result=await response.text();
     if(result!='username and password not match'){
+      sessionStorage.setItem("token",result)
+      console.log(sessionStorage.getItem("token"))
       setToken(result)
+    }
+    else if(result==='username and password not match'){
+      setToken(null)
+      sessionStorage.removeItem("token")
     }
   }
 
@@ -59,7 +65,8 @@ const LogIn = () => {
       console.log("police")
       navigate('/police')
     }
-      else if(result.role==="ADMIN"){
+
+    else if(result.role==="ADMIN"){
       console.log("admin")
       navigate('/AdminIndex')
     }
@@ -88,6 +95,7 @@ const LogIn = () => {
             </label>
             <input
             required
+            
               id="username"
               type="text"
               placeholder="Enter your Username"
@@ -120,9 +128,6 @@ const LogIn = () => {
           {/* Login Button */}
           <button
             type="submit"
-            onClick={()=>{
-              generateToken()
-            }}
             className="w-full bg-[#f0f2f5] text-[#3171c6] font-medium py-3 rounded-md hover:bg-white transition duration-200 text-sm"
           >
             Login

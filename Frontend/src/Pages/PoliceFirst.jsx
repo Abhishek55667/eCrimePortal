@@ -1,5 +1,6 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom';
+import { TokenDataContext } from './TokenContext';
 
 
 //Resolved Cases
@@ -161,7 +162,37 @@ const StatusBadge = ({ status }) => {
 
 
 const 
+<<<<<<< HEAD:Frontend/src/Pages/police.jsx
+police = () => {
+
+  const [token,setToken]=useContext(TokenDataContext)
+
+  const [username, setUsername] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [email, setEmail] = useState('')
+
+  const getUser=async()=>{
+    let link = "http://localhost:8080/user/get-details"
+    const response=await fetch(link,{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+      }
+    });
+    const result=await response.json();
+    setUsername(result.name)
+    setMobile(result.mobile)
+    setEmail(result.email)
+    console.log(result)
+  }
+  useEffect(()=>{
+    getUser()
+  },[])
+
+=======
 policeFirst = () => {
+>>>>>>> ab1c3e156ca4a82b3e5318b60774338ea461986f:Frontend/src/Pages/PoliceFirst.jsx
   return (
     <div>
         <div className="bg-gray-100 min-h-fit flex items-start justify-center p-8">
@@ -180,7 +211,7 @@ policeFirst = () => {
           {/* Details */}
           <div>
             <h2 className="text-3xl font-semibold text-black">
-              Inspector Rajesh Kumar
+              Inspector {username}
             </h2>
 
             <p className="text-orange-500 font-medium mt-1">
@@ -196,12 +227,12 @@ policeFirst = () => {
 
               <div>
                 <p className="text-gray-400">Contact</p>
-                <p className="font-medium">+91 98765 43210</p>
+                <p className="font-medium">{mobile}</p>
               </div>
 
               <div>
                 <p className="text-gray-400">Email</p>
-                <p className="font-medium">rajesh.kumar@police.gov.in</p>
+                <p className="font-medium">{email}</p>
               </div>
 
             </div>

@@ -171,7 +171,7 @@ const Complaint = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitted Data:', formValues);
-    navigate("/Home");
+    
   };
 
   const handleFileDrop = (e) => {
@@ -201,11 +201,29 @@ const Complaint = () => {
     setUploadedFiles([]);
     setCharCount(0);
   };
+  
+  const registerComplaint=async()=>{
+    let link = "http://localhost:8080/user/register-complaint"
+    const response=await fetch(link,{
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify({ fullName : formValues.fullName ,mobile:formValues.fullName , email:formValues.email,address:formValues.address,aadharNumber:formValues.idProofNumber,category:formValues.crimeCategory,complaintTitle:formValues.complaintTitle,location:formValues.incidentLocation,date:formValues.incidentDate,time:formValues.incidentTime,description:formValues.incidentDescription
+      })
+    });
+    const result=await response.text();
+    if(result==="Successfully"){
+      alert("Compalint registration: "+result)
+    }
+    alert("Compalint registration: Failed")
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
-      <main className="max-w-[1440px] mx-auto px-4 md:px-6 py-12 lg:grid lg:grid-cols-[1fr,320px] lg:gap-10 xl:gap-14">
-        <div className="lg:max-w-[900px] w-full mx-auto">
+      <main className="max-w-360 mx-auto px-4 md:px-6 py-12 lg:grid lg:grid-cols-[1fr,320px] lg:gap-10 xl:gap-14">
+        <div className="lg:max-w-225 w-full mx-auto">
           
           <div className="text-center mb-10 px-4">
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl">Register Your Complaint</h1>
@@ -316,7 +334,7 @@ const Complaint = () => {
                     <CustomIcon {...Icons.ArrowPath} className="w-5 h-5 text-gray-400" />
                     Reset Form
                 </button>
-                <button type="submit" className="flex items-center justify-center gap-2.5 text-sm font-semibold text-white px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition">
+                <button onClick={registerComplaint} type="submit" className="flex items-center justify-center gap-2.5 text-sm font-semibold text-white px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] transition">
                     <CustomIcon {...Icons.ChatBubbleCheck} className="w-5 h-5"/>
                     Submit Complaint
                 </button>
