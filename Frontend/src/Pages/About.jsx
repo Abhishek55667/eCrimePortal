@@ -56,7 +56,7 @@ const About = () => {
               A digital platform designed to simplify cybercrime reporting and enhance coordination between citizens and law enforcement.
             </p>
             <button className="bg-[#2A85FF] hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/30">
-             <Link to={'/Complaint'}> Register Complaint</Link>
+             <Link to={'/UserMain/Complaint'}> Register Complaint</Link>
             </button>
           </div>
           {/* Simulated Image Placeholder with Flex */}
@@ -230,7 +230,7 @@ const About = () => {
             Report cybercrime incidents quickly and securely
           </p>
           <button className="bg-white text-blue-600 font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-1 hover:bg-blue-50 transition-all duration-300 flex items-center justify-center gap-2 mx-auto">
-           <Link to={'/Complaint'}> Report a Crime Now</Link> <Icon name="arrowRight" className="w-5 h-5" />
+           <Link to={'/UserMain/Complaint'}> Report a Crime Now</Link> <Icon name="arrowRight" className="w-5 h-5" />
           </button>
         </div>
       </section>

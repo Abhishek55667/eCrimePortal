@@ -88,7 +88,7 @@ const TrackComplaintFirst = () => {
           <div className="text-center pt-4">
             <span className="text-gray-600">Don't have a Complaint ID? </span>
             
-              <Link to={'/Complaint'} className='text-[#0F47DB] hover:text-blue-800 font-medium hover:underline transition-colors duration-200'>Register a new complaint</Link>
+              <Link to={'/UserMain/Complaint'} className='text-[#0F47DB] hover:text-blue-800 font-medium hover:underline transition-colors duration-200'>Register a new complaint</Link>
             
           </div>
 

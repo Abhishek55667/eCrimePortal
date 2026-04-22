@@ -45,7 +45,7 @@ const services = [
     icon: DocumentIcon,
     bgClass: 'bg-blue-100',
     colorClass: 'text-blue-600',
-    click:'/Complaint'
+    click:'/UserMain/Complaint'
   },
   {
     id: 2,
@@ -54,7 +54,7 @@ const services = [
     icon: ChartTrendingIcon,
     bgClass: 'bg-green-100',
     colorClass: 'text-green-600',
-     click:'/TrackComplaintFirst'
+     click:'/UserMain/TrackComplaintFirst'
   },
   {
     id: 3,
@@ -63,7 +63,7 @@ const services = [
     icon: HistoryIcon,
     bgClass: 'bg-purple-100',
     colorClass: 'text-purple-600',
-     click:'/Complaint'
+     click:'/UserMain/Complaint'
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ const services = [
     icon: BookIcon,
     bgClass: 'bg-orange-100',
     colorClass: 'text-orange-500',
-     click:'/Complaint'
+     click:'/UserMain/Complaint'
   },
 ];
 
@@ -115,14 +115,14 @@ const Home = () => {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-             <Link to={'/Complaint'}> Register Complaint</Link>
+             <Link to={'/UserMain/Complaint'}> Register Complaint</Link>
             </button>
 
             <button className="flex items-center justify-center gap-2 bg-white text-blue-600 border-2 border-blue-600 px-8 py-3.5 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
               </svg>
-             <Link to={'/TrackComplaintFirst'}> Track Complaint</Link>
+             <Link to={'/UserMain/TrackComplaintFirst'}> Track Complaint</Link>
             </button>
           </div>
         </div>

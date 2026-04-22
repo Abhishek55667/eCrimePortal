@@ -161,7 +161,7 @@ const StatusBadge = ({ status }) => {
 
 
 const 
-police = () => {
+Police = () => {
   return (
     <div>
         <div className="bg-gray-100 min-h-fit flex items-start justify-center p-8">
@@ -263,7 +263,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-orange-500 text-white px-4 py-1 rounded-lg hover:bg-orange-600 transition duration-300 hover:bg-orange-600 hover:scale-105 active:scale-95">
-                      <Link to={'/UpdateComplaint'}> ✏ Update</Link>
+                      <Link to={'/PoliceMain/UpdateComplaint'}> ✏ Update</Link>
                     </button>
                   </td>
                 </tr>
@@ -328,7 +328,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-blue-500 text-white px-4 py-1.5 rounded-lg transition duration-300 hover:bg-blue-600 hover:scale-105 active:scale-95">
-                      <Link to={'/UpdateComplaint'}> ✏ Update</Link>
+                      <Link to={'/PoliceMain/UpdateComplaint'}> ✏ Update</Link>
                     </button>
                   </td>
                 </tr>
@@ -393,7 +393,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-green-600 text-white px-4 py-1.5 rounded-lg transition duration-300 hover:bg-green-700 hover:scale-105 active:scale-95">
-                      👁 View Details
+                     <Link to={'/PoliceMain/ViewComplaint'}> 👁 View Details</Link>
                     </button>
                   </td>
                 </tr>
@@ -416,5 +416,4 @@ police = () => {
   )
 }
 
-export default 
-police
+export default Police;
