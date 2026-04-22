@@ -183,8 +183,8 @@ const Register = () => {
 
 
   return (
-    <div className="flex justify-center my-12">
-      <div className=" h-full p-20 w-4/7 bg-blue-50 rounded-2xl ">
+    <div className="flex justify-center py-12 bg-[#111C30] text-white">
+      <div className=" h-full p-20 w-4/7 bg-[#0B1524] rounded-2xl ">
 
         <h1 className="font-bold text-4xl pb-4 text-center">Register Details</h1>
         <p className='text-center text-red-600 h-3 text-sm'>{msg}</p>
@@ -194,7 +194,7 @@ const Register = () => {
           <div className="flex gap-30 mt-5">
             <div>
               <div className='flex flex-row justify-between mr-3'>
-                <label className="block font-bold text-black  mb-2" htmlFor="username">
+                <label className="block font-bold   mb-2" htmlFor="username">
                   Username
                 </label>
                 {userNameStatus}
@@ -211,7 +211,7 @@ const Register = () => {
                 }}
               />
 
-              <label className="block font-bold text-black text-sm font-boldmb-2" htmlFor="mobile">
+              <label className="block font-bold text-sm font-boldmb-2" htmlFor="mobile">
                 Password
               </label>
               <input
@@ -226,7 +226,7 @@ const Register = () => {
                 }}
               />
 
-              <label className="block text-black text-sm font-bold font-boldmb-2" htmlFor="rePassword">
+              <label className="block text-sm font-bold font-boldmb-2" htmlFor="rePassword">
                 Re-enter Password
               </label>
               <input
@@ -243,7 +243,7 @@ const Register = () => {
 
             </div>
             <div>
-              <label className="block text-black text-sm font-bold mb-2" htmlFor="fullname">
+              <label className="block  text-sm font-bold mb-2" htmlFor="fullname">
                 Full Name
               </label>
               <input
@@ -258,7 +258,7 @@ const Register = () => {
                 }}
               />
 
-              <label className="block text-black font-bold text-sm mb-2" htmlFor="dob">
+              <label className="block font-bold text-sm mb-2" htmlFor="dob">
                 Date of Birth
               </label>
               <input
@@ -274,7 +274,7 @@ const Register = () => {
               />
 
               <div className='flex flex-row justify-between mr-2 py-1'>
-                <label className="block text-black text-sm font-bold " htmlFor="mobile">
+                <label className="block  text-sm font-bold " htmlFor="mobile">
                   Mobile
                 </label>
                 {mobileStatus}
@@ -300,7 +300,7 @@ const Register = () => {
 
           <div>
             <div className='flex flex-row justify-between mr-10 mt-0.5 '>
-              <label className="block text-black font-bold text-sm mb-2" htmlFor="email">
+              <label className="block  font-bold text-sm mb-2" htmlFor="email">
                 Email
               </label>
               {emailStatus}
@@ -318,7 +318,7 @@ const Register = () => {
               }}
             />
 
-            <label className="block text-black font-bold text-sm mb-2" htmlFor="address">
+            <label className="block qfont-bold text-sm mb-2" htmlFor="address">
               Address
             </label>
             <textarea

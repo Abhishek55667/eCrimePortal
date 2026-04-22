@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom';
-import { TokenDataContext } from './TokenContext';
+import React from 'react'
+import { Link } from 'react-router-dom';
 
 
 //Resolved Cases
@@ -162,33 +161,7 @@ const StatusBadge = ({ status }) => {
 
 
 const 
-police = () => {
-
-  const [token,setToken]=useContext(TokenDataContext)
-
-  const [username, setUsername] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [email, setEmail] = useState('')
-
-  const getUser=async()=>{
-    let link = "http://localhost:8080/user/get-details"
-    const response=await fetch(link,{
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
-        "Content-Type": "application/json"
-      }
-    });
-    const result=await response.json();
-    setUsername(result.name)
-    setMobile(result.mobile)
-    setEmail(result.email)
-    console.log(result)
-  }
-  useEffect(()=>{
-    getUser()
-  },[])
-
+Police = () => {
   return (
     <div>
         <div className="bg-gray-100 min-h-fit flex items-start justify-center p-8">
@@ -207,7 +180,7 @@ police = () => {
           {/* Details */}
           <div>
             <h2 className="text-3xl font-semibold text-black">
-              Inspector {username}
+              Inspector Rajesh Kumar
             </h2>
 
             <p className="text-orange-500 font-medium mt-1">
@@ -223,12 +196,12 @@ police = () => {
 
               <div>
                 <p className="text-gray-400">Contact</p>
-                <p className="font-medium">{mobile}</p>
+                <p className="font-medium">+91 98765 43210</p>
               </div>
 
               <div>
                 <p className="text-gray-400">Email</p>
-                <p className="font-medium">{email}</p>
+                <p className="font-medium">rajesh.kumar@police.gov.in</p>
               </div>
 
             </div>
@@ -290,7 +263,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-orange-500 text-white px-4 py-1 rounded-lg hover:bg-orange-600 transition duration-300 hover:bg-orange-600 hover:scale-105 active:scale-95">
-                      <Link to={'/UpdateComplaint'}> ✏ Update</Link>
+                      <Link to={'/PoliceMain/UpdateComplaint'}> ✏ Update</Link>
                     </button>
                   </td>
                 </tr>
@@ -355,7 +328,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-blue-500 text-white px-4 py-1.5 rounded-lg transition duration-300 hover:bg-blue-600 hover:scale-105 active:scale-95">
-                      <Link to={'/UpdateComplaint'}> ✏ Update</Link>
+                      <Link to={'/PoliceMain/UpdateComplaint'}> ✏ Update</Link>
                     </button>
                   </td>
                 </tr>
@@ -420,7 +393,7 @@ police = () => {
                   </td>
                   <td>
                     <button className="bg-green-600 text-white px-4 py-1.5 rounded-lg transition duration-300 hover:bg-green-700 hover:scale-105 active:scale-95">
-                      👁 View Details
+                     <Link to={'/PoliceMain/ViewComplaint'}> 👁 View Details</Link>
                     </button>
                   </td>
                 </tr>
@@ -443,5 +416,4 @@ police = () => {
   )
 }
 
-export default 
-police
+export default Police;

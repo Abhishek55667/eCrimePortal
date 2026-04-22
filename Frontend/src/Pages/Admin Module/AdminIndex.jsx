@@ -398,12 +398,9 @@ const [activeTab, setActiveTab] = useState('Complaints');
     <div>
         <div className="flex h-screen bg-[#060D18] font-sans text-white overflow-hidden">
       
-      {/* Sidebar: shrink-0 keeps its width fixed, flex-col handles vertical alignment natively */}
-      <aside className="w-[260px] shrink-0 bg-[#060D18] border-r border-[#1E2D45] flex flex-col py-6 px-4 gap-2 z-10 overflow-y-auto">
-        <div className="px-4 pb-6 mb-2 border-b border-[#1E2D45] flex items-center gap-3">
-           <div className="bg-blue-600 p-1.5 rounded-md"><Icons.ShieldCheck /></div>
-           <span className="text-xl font-bold tracking-wide">eCrime Portal</span>
-        </div>
+     
+      <aside className="w-[260px] shrink-0 bg-[#060D18] border-r border-[#1E2D45] flex flex-col py-6 px-4 gap-2 z-10 overflow-y-auto fixed rounded-2xl ">
+        
 
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -424,7 +421,7 @@ const [activeTab, setActiveTab] = useState('Complaints');
       </aside>
 
       {/* Main Content Area: flex-1 fills remaining width */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#0B1524] overflow-y-auto">
+      <main className="flex-1 flex flex-col min-w-0 bg-[#0B1524] overflow-y-auto pl-65">
         <div className="p-8 max-w-[1600px] w-full mx-auto h-full">
           {activeTab === 'Complaints' && <TabComplaints />}
           {activeTab === 'Assign Cases' && <TabAssignCases />}
