@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
 
   const navigate=useNavigate();
-  const [logOut, setLogOut] = useState()
 
 
   return (
@@ -32,7 +31,10 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to={"/UserMain/ContactUs"} className="hover:text-blue-600 duration-200 transition-colors">Contact Us</Link>
-        <button className="bg-red-700 rounded-2xl text-xs px-2 hover:bg-red-600 duration-200 transition-colors">LogOut</button>
+        <button onClick={()=>{
+          sessionStorage.clear()
+          navigate('/LogIn')
+        }} className="bg-red-700 rounded-2xl text-xs px-2 hover:bg-red-600 duration-200 transition-colors">LogOut</button>
       </div>
     </div>
   );

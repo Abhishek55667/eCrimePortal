@@ -2,7 +2,6 @@ package com.Backend.Controller;
 
 import com.Backend.Entity.Complaints;
 import com.Backend.Entity.User;
-import com.Backend.Services.ComplaintServices;
 import com.Backend.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,7 +96,7 @@ public class UserController {
     }
 
     @GetMapping("/track-complaint-id/{complaintId}")
-    public ResponseEntity<Complaints> getComplaintById(@PathVariable int complaintId) {
+    public ResponseEntity<Complaints> getComplaintById(@PathVariable long complaintId) {
         return new ResponseEntity<>(userServices.getComplaintById(complaintId), HttpStatus.OK);
     }
 }

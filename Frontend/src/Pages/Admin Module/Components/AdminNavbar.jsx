@@ -1,5 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const Icons = {
 
@@ -16,6 +18,7 @@ const Icons = {
   )
 };
 const AdminNavbar = () => {
+  const navigate=useNavigate();
   return (
     <div>
         <div>
@@ -39,10 +42,13 @@ const AdminNavbar = () => {
         </button>
 
      
-        <button className="flex items-center gap-2 bg-white px-5 py-2 rounded-lg shadow-sm hover:shadow hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 ml-2">
+        <button onClick={()=>{
+          sessionStorage.clear()
+          navigate('/LogIn')
+        }} className="flex items-center gap-2 bg-white px-5 py-2 rounded-lg shadow-sm hover:shadow hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 ml-2">
           <Icons.Logout />
           <span className="text-[#FE982A] font-semibold text-sm">
-           <Link to={'/LogIn'}> Logout</Link>
+           Logout
           </span>
         </button>
         

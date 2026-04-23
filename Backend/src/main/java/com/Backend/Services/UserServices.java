@@ -1,10 +1,7 @@
 package com.Backend.Services;
 
 
-import com.Backend.Entity.Complaints;
-import com.Backend.Entity.Role;
-import com.Backend.Entity.Status;
-import com.Backend.Entity.User;
+import com.Backend.Entity.*;
 import com.Backend.Repository.ComplaintRepo;
 import com.Backend.Repository.UserRepo;
 import jakarta.annotation.PostConstruct;
@@ -30,6 +27,7 @@ public class UserServices {
     private static int adminCount=1000;
     private static int policeCount=10000;
     private static int userCount=100000;
+    private static long complaintCount=100000000;
 
     @PostConstruct
     public void updateCount(){
@@ -44,6 +42,9 @@ public class UserServices {
                 adminCount=i.getId()+1;
             }
 
+        }
+        for (Complaints i:getAllComplaints()){
+            complaintCount=i.getComplaintId()+1;
         }
     }
 
@@ -120,8 +121,10 @@ public class UserServices {
     }
 
     public void saveNewComplaint(Complaints complaints){
+        complaints.setComplaintId(complaintCount);
         complaints.setStatus(Status.REGISTERED);
         complaintRepo.save(complaints);
+        complaintCount++;
     }
 
     public void saveComplaint(Complaints complaints){
@@ -132,8 +135,12 @@ public class UserServices {
         return complaintRepo.findAll();
     }
 
-    public Complaints getComplaintById(int complaintId){
+    public Complaints getComplaintById(long complaintId){
         return complaintRepo.findByComplaintId(complaintId);
+    }
+
+    public void deleteComplaintById(long complaintId){
+         complaintRepo.deleteByComplaintId(complaintId);
     }
 
 }

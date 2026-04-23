@@ -50,9 +50,10 @@ const TrackComplaintFirst = () => {
     if (result != "") {
       console.log(result)
       sessionStorage.setItem("complaint", result)
-      navigate('/TrackComplaint')
+      navigate('/UserMain/TrackComplaint')
     }
     else {
+      alert("Enter a proper track no.")
       console.log('iuviv')
     }
   }
@@ -114,7 +115,7 @@ const TrackComplaintFirst = () => {
             <div className="text-center pt-4">
               <span className="text-gray-600">Don't have a Complaint ID? </span>
 
-              <Link to={'/Complaint'} className='text-[#0F47DB] hover:text-blue-800 font-medium hover:underline transition-colors duration-200'>Register a new complaint</Link>
+              <Link to={'/UserMain/Complaint'} className='text-[#0F47DB] hover:text-blue-800 font-medium hover:underline transition-colors duration-200'>Register a new complaint</Link>
 
             </div>
 

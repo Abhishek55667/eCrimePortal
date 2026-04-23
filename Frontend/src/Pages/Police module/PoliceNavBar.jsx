@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 const Icons = {
 
 
@@ -14,6 +15,7 @@ const Icons = {
   )
 };
 const PoliceNavBar = () => {
+  const navigate=useNavigate();
   return (
     <div>
      <header className="bg-[#FE982A] w-full px-6 py-4 flex items-center justify-between shadow-md font-sans">
@@ -36,7 +38,10 @@ const PoliceNavBar = () => {
         </button>
 
      
-        <button className="flex items-center gap-2 bg-white px-5 py-2 rounded-lg shadow-sm hover:shadow hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 ml-2">
+        <button onClick={()=>{
+          sessionStorage.clear()
+          navigate('/LogIn')
+        }} className="flex items-center gap-2 bg-white px-5 py-2 rounded-lg shadow-sm hover:shadow hover:bg-gray-50 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 ml-2">
           <Icons.Logout />
           <span className="text-[#FE982A] font-semibold text-sm">
             Logout

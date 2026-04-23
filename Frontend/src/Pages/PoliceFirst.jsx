@@ -161,10 +161,9 @@ const StatusBadge = ({ status }) => {
 };
 
 
-const 
-<<<<<<< HEAD:Frontend/src/Pages/police.jsx
-police = () => {
 
+policeFirst = () => {
+  
   const [token,setToken]=useContext(TokenDataContext)
 
   const [username, setUsername] = useState('')
@@ -190,9 +189,6 @@ police = () => {
     getUser()
   },[])
 
-=======
-policeFirst = () => {
->>>>>>> ab1c3e156ca4a82b3e5318b60774338ea461986f:Frontend/src/Pages/PoliceFirst.jsx
   return (
     <div>
         <div className="bg-gray-100 min-h-fit flex items-start justify-center p-8">

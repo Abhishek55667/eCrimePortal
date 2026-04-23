@@ -29,10 +29,10 @@ const LogIn = () => {
     });
 
     const result=await response.text();
+    console.log(result)
     if(result!='username and password not match'){
       sessionStorage.setItem("token",result)
       console.log(sessionStorage.getItem("token"))
-      setToken(result)
     }
     else if(result==='username and password not match'){
       setToken(null)
@@ -49,7 +49,7 @@ const LogIn = () => {
     const response=await fetch(link,{
       method: "GET",
       headers: {
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
         "Content-Type":"application/json"
       }
     });
@@ -58,17 +58,17 @@ const LogIn = () => {
     console.log(result.role)
     if(result.role==="USER"){
       console.log("user")
-      navigate('/Home')
+      navigate('/UserMain')
     }
     
     else if(result.role==="POLICE"){
       console.log("police")
-      navigate('/police')
+      navigate('/PoliceMain')
     }
 
     else if(result.role==="ADMIN"){
       console.log("admin")
-      navigate('/AdminIndex')
+      navigate('/AdminMain')
     }
     
   }

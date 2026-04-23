@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { use, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { FaFacebook } from "react-icons/fa";
@@ -15,7 +15,34 @@ const ContactUs = () => {
 const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    navigate("/Home");
+    e.preventDefault()
+    console.log(name,phone,email,company,subject,message)
+    setName('')
+    setCompany('')
+    setEmail('')
+    setPhone('')
+    setSubject('')
+    setMessage('')
+  }
+
+  const [name, setName] = useState()
+  const [phone, setPhone] = useState()
+  const [email, setEmail] = useState()
+  const [company, setCompany] = useState()
+  const [subject, setSubject] = useState()
+  const [message, setMessage] = useState()
+
+  const save=async()=>{
+    let link=`http://localhost:8080/message/save`
+    const response=await fetch(link, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
+        "Content-Type": "application/json"
+      },body:JSON.stringify({name:name,mobile:phone,email:email,company:company,subject:subject,message:message})
+    });
+    const result=await response.text()
+    console.log(result)
   }
 
   return (
@@ -100,6 +127,10 @@ const navigate = useNavigate();
               </label>
               <input
               required
+              value={name}
+              onChange={(e)=>{
+                setName(e.target.value)
+              }}
                 id="username"
                 type="text"
                 placeholder="Enter your Name"
@@ -111,6 +142,10 @@ const navigate = useNavigate();
               </label>
               <input
               required
+              value={phone}
+              onChange={(e)=>{
+                setPhone(e.target.value)
+              }}
                 id="phone"
                 type="tel"
                 maxLength={10}
@@ -125,6 +160,10 @@ const navigate = useNavigate();
               Company
             </label>
                 <input
+                value={company}
+              onChange={(e)=>{
+                setCompany(e.target.value)
+              }}
               id="company"
               type="text"
               placeholder="Enter your Company name"
@@ -135,6 +174,10 @@ const navigate = useNavigate();
               Email
             </label>
                 <input
+                value={email}
+              onChange={(e)=>{
+                setEmail(e.target.value)
+              }}
                 required
               id="email"
               type="email"
@@ -149,6 +192,10 @@ const navigate = useNavigate();
               Subject
             </label>
                 <input
+                value={subject}
+              onChange={(e)=>{
+                setSubject(e.target.value)
+              }}
                 required
               id="Subject"
               type="text"
@@ -160,6 +207,11 @@ const navigate = useNavigate();
               Message
             </label>
                 <textarea
+                required
+                value={message}
+              onChange={(e)=>{
+                setMessage(e.target.value)
+              }}
                 cols={30}
                 rows={5}
               id="message"
@@ -169,7 +221,7 @@ const navigate = useNavigate();
               className="w-full bg-gray-200 text-gray-800 px-4 py-3 rounded-2xl focus:outline-none focus:ring-2  focus:ring-blue-300 placeholder-gray-500 text-sm"
             />
            <div className='text-center pt-4'>
-             <button className='bg-blue-800 text-white w-140 h-10 rounded-3xl'>Send</button>
+             <button onClick={save} className='bg-blue-800 text-white w-140 h-10 rounded-3xl'>Send</button>
            </div>
           </div>
          </form>

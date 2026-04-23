@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Data
 public class Complaints {
     @Id
-    private int complaintId;
+    private Long complaintId;
     private String username;
     private String fullName;
     private String mobile;
