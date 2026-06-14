@@ -63,7 +63,7 @@ const services = [
     icon: HistoryIcon,
     bgClass: 'bg-purple-100',
     colorClass: 'text-purple-600',
-     click:'/UserMain/Complaint'
+     click:'/UserMain/RecentComplaints'
   },
   {
     id: 4,
@@ -72,7 +72,7 @@ const services = [
     icon: BookIcon,
     bgClass: 'bg-orange-100',
     colorClass: 'text-orange-500',
-     click:'/UserMain/Complaint'
+     click:'/UserMain/CyberAwarenessTips'
   },
 ];
 

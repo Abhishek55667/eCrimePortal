@@ -210,14 +210,17 @@ const Complaint = () => {
         "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
         "Content-Type":"application/json"
       },
-      body: JSON.stringify({ fullName : formValues.fullName ,mobile:formValues.fullName , email:formValues.email,address:formValues.address,aadharNumber:formValues.idProofNumber,category:formValues.crimeCategory,complaintTitle:formValues.complaintTitle,location:formValues.incidentLocation,date:formValues.incidentDate,time:formValues.incidentTime,description:formValues.incidentDescription
+      body: JSON.stringify({ fullName : formValues.fullName ,mobile:formValues.phone , email:formValues.email,address:formValues.address,aadharNumber:formValues.idProofNumber,category:formValues.crimeCategory,crimeTitle:formValues.complaintTitle,location:formValues.incidentLocation,date:formValues.incidentDate,time:formValues.incidentTime,description:formValues.incidentDescription
       })
     });
     const result=await response.text();
     if(result==="Successfully"){
       alert("Compalint registration: "+result)
+      handleReset()
     }
+    else{
     alert("Compalint registration: Failed")
+    }
   }
 
   return (

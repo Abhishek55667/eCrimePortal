@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 // ============================================================================
@@ -89,8 +89,7 @@ const SectionCard = ({ children, className = "" }) => (
 // ============================================================================
 // 4. MAIN PAGE LAYOUT
 // ============================================================================
-const ViewComplaint = () => {
-  const [complaint, setComplaint] = useState(JSON.parse(sessionStorage.getItem("SolvedPoliceComplaint")) || {})
+const ViewResolvedComplaint = () => {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 p-6 md:p-8 lg:p-10 flex justify-center">
       <div className="max-w-[1200px] w-full flex flex-col gap-6">
@@ -102,16 +101,16 @@ const ViewComplaint = () => {
           <div className="flex flex-col lg:flex-row justify-between gap-6">
             {/* Left Data Grid */}
             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-4">
-              <DetailItem icon={Icons.Hash} label="Case ID" value={complaint.complaintId} />
+              <DetailItem icon={Icons.Hash} label="Case ID" value="EC-2026-045678" />
               <div className="md:col-span-3">
-                <DetailItem icon={Icons.DocumentText} label="Complaint Title" value={complaint.complaintTitle} />
+                <DetailItem icon={Icons.DocumentText} label="Complaint Title" value="Online Banking Fraud - Unauthorized Transaction" />
               </div>
-              <DetailItem icon={Icons.Tag} label="Crime Type" value={complaint.category} />
-              <DetailItem icon={Icons.Calendar} label="Date Filed" value={complaint.date} />
+              <DetailItem icon={Icons.Tag} label="Crime Type" value="Cyber Fraud" />
+              <DetailItem icon={Icons.Calendar} label="Date Filed" value="March 28, 2026" />
               <DetailItem 
                 icon={Icons.ExclamationCircle} 
                 label="Priority" 
-                value={<span className="text-yellow-600 bg-red-50 border border-red-100 px-2 py-0.5 rounded text-xs font-bold tracking-wide uppercase">{complaint.priority}</span>} 
+                value={<span className="text-red-600 bg-red-50 border border-red-100 px-2 py-0.5 rounded text-xs font-bold tracking-wide uppercase">High</span>} 
               />
               <div className="flex flex-col">
                 <span className="text-xs text-slate-500 mb-1 pl-8">Status</span>
@@ -143,10 +142,10 @@ const ViewComplaint = () => {
           <SectionCard>
             <h2 className="text-lg font-bold text-[#FF8C00] mb-6 border-b border-slate-100 pb-2">Complainant Details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
-              <DetailItem icon={Icons.User} label="Name" value={complaint.fullName} />
-              <DetailItem icon={Icons.Phone} label="Contact Number" value={complaint.mobile} />
-              <DetailItem icon={Icons.Mail} label="Email" value={complaint.email} />
-              <DetailItem icon={Icons.MapPin} label="Address" value={complaint.address}valueClass="text-slate-900 font-medium leading-relaxed" />
+              <DetailItem icon={Icons.User} label="Name" value="Rajesh Kumar Sharma" />
+              <DetailItem icon={Icons.Phone} label="Contact Number" value="+91 98765 43210" />
+              <DetailItem icon={Icons.Mail} label="Email" value="rajesh.sharma@email.com" />
+              <DetailItem icon={Icons.MapPin} label="Address" value="123, Green Park Extension, Sector 21, New Delhi - 110016" valueClass="text-slate-900 font-medium leading-relaxed" />
             </div>
           </SectionCard>
 
@@ -273,4 +272,4 @@ const ViewComplaint = () => {
   );
 }
 
-export default ViewComplaint;
+export default ViewResolvedComplaint;

@@ -76,8 +76,11 @@ public class UserController {
     @PostMapping("/register-complaint")
     public ResponseEntity<String> saveComplaint(@RequestBody Complaints complaints){
         if (complaints!=null){
+            Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+            String username=authentication.getName();
+            complaints.setUsername(username);
             userServices.saveNewComplaint(complaints);
-            return new ResponseEntity<>("saved", HttpStatus.OK);
+            return new ResponseEntity<>("Successfully", HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

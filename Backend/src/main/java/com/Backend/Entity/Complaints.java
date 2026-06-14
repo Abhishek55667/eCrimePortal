@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -19,11 +20,16 @@ public class Complaints {
     private String address;
     private String aadharNumber;
     private String category;
+    private String complaintTitle;
     private String location;
     private LocalDate date;
     private LocalTime time;
     private String description;
+    private String priority;
     private Status status;
+    private LocalDate assignedDate;
     private String assignedOfficer;
     private String remark;
+    private LocalDate resolutionDate;
+    private String outcome;
 }

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { TokenDataContext } from "./TokenContext";
 
 
 const LogIn = () => {
@@ -9,7 +8,6 @@ const LogIn = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useContext(TokenDataContext)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +33,6 @@ const LogIn = () => {
       console.log(sessionStorage.getItem("token"))
     }
     else if(result==='username and password not match'){
-      setToken(null)
       sessionStorage.removeItem("token")
     }
   }
@@ -55,6 +52,7 @@ const LogIn = () => {
     });
 
     const result=await response.json();
+    sessionStorage.setItem("profile",JSON.stringify(result))
     console.log(result.role)
     if(result.role==="USER"){
       console.log("user")

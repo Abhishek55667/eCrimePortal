@@ -10,6 +10,8 @@ import TrackComplaint from "./TrackComplaint";
 import TrackComplaintFirst from "./TrackComplaintFirst";
 import { Link, Route, Routes } from "react-router-dom";
 import UserMap from "./UserMap";
+import RecentComplaints from "./RecentComplaints";
+import CyberAwarenessTips from "./CyberAwarenessTips";
 
 const UserMain = () => {
   return (
@@ -27,6 +29,8 @@ const UserMain = () => {
           <Route path="/First" element={<First />}></Route>
           <Route path="/Complaint" element={<Complaint />}></Route>
           <Route path="/TrackComplaint" element={<TrackComplaint />}></Route>
+          <Route path="/RecentComplaints" element={<RecentComplaints />}></Route>
+          <Route path="/CyberAwarenessTips" element={<CyberAwarenessTips />}></Route>
           <Route
             path="/TrackComplaintFirst"
             element={<TrackComplaintFirst />}

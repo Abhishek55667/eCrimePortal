@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController()
 @RequestMapping("/police")
@@ -71,7 +72,7 @@ public class PoliceController {
         String username=authentication.getName();
         List<Complaints> list=new ArrayList<>();
         for (Complaints x: policeServices.getAllComplaints()){
-            if (x.getAssignedOfficer().equals(username)){
+            if (Objects.equals(username,x.getAssignedOfficer())&& x.getStatus()!=Status.SOLVED){
                 list.add(x);
             }
         }
@@ -84,7 +85,7 @@ public class PoliceController {
         String username=authentication.getName();
         List<Complaints> list=new ArrayList<>();
         for (Complaints x: policeServices.getAllComplaints()){
-            if (x.getAssignedOfficer().equals(username) && x.getStatus().equals(Status.SOLVED)){
+            if (Objects.equals(username,x.getAssignedOfficer()) && x.getStatus().equals(Status.SOLVED)){
                 list.add(x);
             }
         }
@@ -100,6 +101,11 @@ public class PoliceController {
         }
         policeServices.saveComplaint(old);
         return new ResponseEntity<>("Successfully Updated",HttpStatus.OK);
+    }
+
+    @GetMapping("/track-complaint-id/{complaintId}")
+    public ResponseEntity<Complaints> getComplaintById(@PathVariable long complaintId) {
+        return new ResponseEntity<>(policeServices.getComplaintById(complaintId), HttpStatus.OK);
     }
 
 }
